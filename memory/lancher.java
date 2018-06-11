@@ -5,15 +5,21 @@ import java.util.Scanner;
 
 public class lancher{
 	public static void main(String[] args){
+		Game_mode Game_mode = new Game_mode();
 		BufferedReader reader_int = new BufferedReader(new InputStreamReader(System.in));
 		Scanner reader_String = new Scanner(System.in);
+
 		boolean round = true;
 		int input_int = 0;
+		String input_recheck;
 		
 		while(round){
+
 			boolean loop = true;
+
 			while(loop){		
 				System.out.println("Valasz jatek modot\n(1)Konnyu mod\n(2)Mediu mod\n(3)Nehez mod\n(4)jateks sajat szovegel");
+
 				try{
 					input_int = Integer.parseInt(reader_int.readLine());
 					if(input_int > 0 && input_int < 5){
@@ -22,25 +28,36 @@ public class lancher{
 						System.out.println("Wrong input");
 					}
 				}catch(IOException e){
-				System.out.println("Wrong input");
+					System.out.println("Wrong input");
 				}catch (NumberFormatException e) {
 					System.out.println("Wrong input");
 				}
 			}
-			if(input_int == 1 || input_int == 2 || input_int == 3){
-				Game_mode.mode_1(input_int);
-			}else{
-				Game_mode.mode_2();
+
+			switch(input_int){
+				case 1:
+					Game_mode.mode_1("Word_list_1");
+				break;
+				case 2:
+					Game_mode.mode_1("Word_list_2");
+				break;
+				case 3:
+					Game_mode.mode_1("Word_list_3");
+				break;
+				case 4:
+					Game_mode.mode_2();
+				break;
 			}
+
 			loop = true;
+
 			while(loop){
 				System.out.println("Akkarsz meg jadszani (y) igen (n)nem");
-				String in = new String("");
-				in = reader_String.nextLine();
+				input_recheck = reader_String.nextLine();
 				
-				if(in.equals("y")){
+				if(input_recheck.equals("y")){
 					loop = false;
-				}else if(in.equals("n")){
+				}else if(input_recheck.equals("n")){
 					loop = false;
 					round = false;
 				}
